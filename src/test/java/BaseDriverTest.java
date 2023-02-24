@@ -11,28 +11,32 @@ public class BaseDriverTest extends RemoteWD {
     public TestAgentRegression three;
 
     private final List<TestAgentRegression> agents = new ArrayList<>();
-    private final TestAgentRegression agentRegression = new TestAgentRegression(remoteDriver);
+//    private final TestAgentRegression agentRegression = new TestAgentRegression(remoteDriver());
 
     public void initAgents(int count) {
         agents.addAll(Arrays.asList(one, two, three));
 
         switch (count) {
-            case 1 -> one = getNewTestAgent();
-            case 2 -> {
+            case 1:
+                one = getNewTestAgent();
+                break;
+            case 2: {
                 one = getNewTestAgent();
                 two = getNewTestAgent();
+                break;
             }
-            case 3 -> {
+            case 3: {
                 one = getNewTestAgent();
                 two = getNewTestAgent();
                 three = getNewTestAgent();
             }
-            default -> throw new AssertionError("");
+            default:
+                throw new AssertionError("");
         }
     }
 
     private TestAgentRegression getNewTestAgent() {
-        return new TestAgentRegression(remoteDriver);
+        return new TestAgentRegression(remoteDriver());
     }
 
 //    @BeforeClass
@@ -42,8 +46,9 @@ public class BaseDriverTest extends RemoteWD {
 
     @AfterClass
     public void quite() {
-        remoteDriver.close();
-        remoteDriver.quit();
+        agents.forEach(agent -> {
+            agent.getDriver().close();
+            agent.getDriver().quit();
+        });
     }
-
 }

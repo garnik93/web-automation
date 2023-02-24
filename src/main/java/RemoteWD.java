@@ -14,9 +14,9 @@ import static com.codeborne.selenide.Configuration.browserCapabilities;
 
 public class RemoteWD {
 
-    public final RemoteWebDriver remoteDriver = driver();
+    public final RemoteWebDriver remoteDriver = remoteDriver();
 
-    public RemoteWebDriver driver() {
+    public RemoteWebDriver remoteDriver() {
         ChromeOptions options = new ChromeOptions();
 
         Configuration.remote = "http://localhost:4444/wd/hub";

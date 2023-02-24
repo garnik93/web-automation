@@ -24,6 +24,7 @@ public class BaseTest extends BaseDriverTest {
 
         TestAgent.baseTest("Open google page", () -> {
             one.openGoogle();
+            two.openGoogle();
         });
 
         TestAgent.baseTest("Check text of input must show '" + text + "'", () -> {
@@ -31,6 +32,13 @@ public class BaseTest extends BaseDriverTest {
             input.sendKeys(text);
 
             Assert.assertEquals(input.getAttribute("value"), text, "should be '" + text + "'");
+
+            WebElement inputTwo = two.findElementByLocator("[name='q']");
+            inputTwo.sendKeys(text);
+
+            Assert.assertEquals(inputTwo.getAttribute("value"), text, "should be '" + text + "'");
         });
+
+        int i = 0;
     }
 }
