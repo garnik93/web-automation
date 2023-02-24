@@ -20,16 +20,15 @@ public class BaseDriverTest extends RemoteWD {
             case 1:
                 one = getNewTestAgent();
                 break;
-            case 2: {
+            case 2:
                 one = getNewTestAgent();
                 two = getNewTestAgent();
                 break;
-            }
-            case 3: {
+            case 3:
                 one = getNewTestAgent();
                 two = getNewTestAgent();
                 three = getNewTestAgent();
-            }
+                break;
             default:
                 throw new AssertionError("");
         }
