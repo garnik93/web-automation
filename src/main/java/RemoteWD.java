@@ -17,7 +17,7 @@ public class RemoteWD {
     public final RemoteWebDriver remoteDriver = driver();
 
     public RemoteWebDriver driver() {
-        ChromeOptions options = new ChromeOptions();
+        ChromeOptions options =  new ChromeOptions();
 
         Configuration.remote = "http://localhost:4444/wd/hub";
         Configuration.browser = "chrome";
