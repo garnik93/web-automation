@@ -17,7 +17,7 @@ public class RemoteWD {
     public final RemoteWebDriver remoteDriver = driver();
 
     public RemoteWebDriver driver() {
-        ChromeOptions options = new ChromeOptions();
+        ChromeOptions options =  new ChromeOptions();
 
         Configuration.remote = "http://localhost:4444/wd/hub";
         Configuration.browser = "chrome";
@@ -30,8 +30,12 @@ public class RemoteWD {
         options.setCapability("selenoid:options", new HashMap<String, Object>() {{
             put("name", "garnik");
             put("sessionTimeout", "15m");
-            put("env", new ArrayList<String>() {{add("TZ=UTC");}});
-            put("labels", new HashMap<String, Object>() {{put("automated", "true");}});
+            put("env", new ArrayList<String>() {{
+                add("TZ=UTC");
+            }});
+            put("labels", new HashMap<String, Object>() {{
+                put("automated", "true");
+            }});
             put("enableVideo", false);
             put("enableVNC", true);
         }});
