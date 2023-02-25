@@ -9,14 +9,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.logging.Logger;
 
-public class TestAgentRegression {
+public class TestAgentRegression extends Page {
     private final WebDriverWait wait;
-
     private final SessionId sessionId;
     private final String browserName;
     private final String browserVersion;
     private static final Logger logger = Logger.getLogger(RemoteWebDriver.class.getName());
     private final RemoteWebDriver driver;
+    private final PageFactory pageFactory;
 
     public TestAgentRegression(RemoteWebDriver remoteWebDriver) {
         this.sessionId = remoteWebDriver.getSessionId();
@@ -25,6 +25,7 @@ public class TestAgentRegression {
         this.driver = remoteWebDriver;
         logger.addHandler(LoggingHandler.getInstance());
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        this.pageFactory = new PageFactory(this);
     }
 
     public SessionId getSessionId() {
@@ -43,12 +44,16 @@ public class TestAgentRegression {
         return driver;
     }
 
+    public PageFactory getPageFactory() {
+        return pageFactory;
+    }
+
     public TestAgentRegression openGoogle() {
         driver.get("https://www.google.com/");
         return this;
     }
 
-    public String getUrl() {
+    public String getCurrentUrl() {
         return driver.getCurrentUrl();
     }
 
@@ -65,5 +70,13 @@ public class TestAgentRegression {
         return wait.pollingEvery(Duration.ofMillis(500))
                 .withMessage("Element " + locator + " not find of 30 seconds")
                 .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator)));
+    }
+
+    public WelcomeGooglePage onWelcomeGooglePage() {
+        return this.pageFactory.getPage(WelcomeGooglePage.class);
+    }
+
+    public GoogleSearchPage onGoogleSearchPage() {
+        return this.pageFactory.getPage(GoogleSearchPage.class);
     }
 }

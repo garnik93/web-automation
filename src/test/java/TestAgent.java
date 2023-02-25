@@ -1,5 +1,6 @@
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.testng.log4testng.Logger;
+
+import java.util.Date;
 
 public class TestAgent extends TestAgentRegression {
 
@@ -9,8 +10,6 @@ public class TestAgent extends TestAgentRegression {
 
     public static void baseTest(String step, Runnable runnable) {
         runnable.run();
-        Logger.getLogger(TestAgentRegression.class);
-
-        System.out.println(java.util.logging.Logger.getAnonymousLogger().getLevel() + step);
+        System.out.println("[ Test agent ][ " + new Date().getDate() + " ] " + step);
     }
 }
